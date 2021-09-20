@@ -49,26 +49,6 @@ export class UserRepository {
     flush() {
         this.cache.flushAll();
     }
-
-    //     /**
-    //  * @param AdaptorInterface $adaptor
-    //  * @param int $userId
-    //  * @return ArrayDecorator
-    //  */
-    //      public function getSubOrdinates(AdaptorInterface $adaptor, int $userId): ArrayDecorator
-    //      {
-    //          $userRoleId = $this->get($userId)['Role'];
-     
-    //          $subordinateRoleIds = $adaptor
-    //              ->buildTree($userRoleId)
-    //              ->getAllDescendantsIds();
-     
-    //          $subordinateUsers = array_filter($this->getAll(), function ($user) use ($subordinateRoleIds) {
-    //              return in_array($user['Role'], $subordinateRoleIds);
-    //          });
-     
-    //          return new ArrayDecorator($subordinateUsers);
-    //      }
 }
 
 export const userRepo = new UserRepository();
