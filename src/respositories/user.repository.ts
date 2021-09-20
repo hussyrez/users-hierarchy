@@ -36,10 +36,6 @@ export class UserRepository {
     addAllUsers(users: User[]): User[]{
         let success = this.cache.set( "users", users, 10000 );
 
-        if(!success){
-            console.log("Failed to cache all users.")
-        }
-
         return this.cache.get("users") as User[] || [];
     }
 

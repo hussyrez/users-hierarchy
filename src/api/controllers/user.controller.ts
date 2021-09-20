@@ -8,25 +8,57 @@ import { Role } from "../../models/role.interface";
 
 export class UserController {
     
+    /**
+     * Add list of users to the cache
+     * @param req 
+     * @param res 
+     */
     addUsers(req: Request, res: Response)  {
-        let users: User[] = req.body;
-        console.log(users);
 
-        let result = userService.addUsers(users);
-        res.status(HttpStatus.OK).send(result);
+        if(req.body instanceof Array && req.body.length > 0){
+            let users: User[] = req.body;
+
+            // user validation
+			for(let user of users){
+				if(!("Role" in user) || !("Id" in user) || !("Name" in user))
+					res.status(HttpStatus.BAD_REQUEST).send("invalid user exists in the request");
+			}
+
+            let {statusCode, message} = userService.addUsers(users);
+			
+			// if list of users is empty fetching from the cache, let the user know
+			res.status(statusCode).send(message);
+		}
+		else{
+			res.status(HttpStatus.BAD_REQUEST).send("invalid users list");
+		}
     }
 
+    /**
+     * Fetch all the users from the cache
+     * @param req 
+     * @param res 
+     */
     getUsers(req: Request, res: Response)  {
-        let users = userService.getUsers();
+        let {statusCode, message} = userService.getUsers();
 
-        res.status(HttpStatus.OK).send(users);
+		res.status(statusCode).send(message);
     }
 
+    /**
+     * Fetch all subordinates of a given employee
+     * @param req 
+     * @param res 
+     */
     getSubordinates(req: Request, res: Response) {
-        let roles = roleService.getRoles() as Role[];
-        let newRoles = userService.getSubordinates(parseInt(req.params.id), roles);
+        let {statusCode, message} = roleService.getRoles();
+        if(statusCode == HttpStatus.OK) {
+            let roles = message as Role[];
+            ({statusCode, message} = userService.getSubordinates(parseInt(req.params.id), roles));
+            
+        }
 
-        res.status(HttpStatus.OK).send(newRoles);
+        res.status(statusCode).send(message);
     }
 
 }

@@ -1,4 +1,4 @@
-module.exports.roles = [
+export let roles = [
     {
     "Id": 1,
     "Name": "System Administrator",

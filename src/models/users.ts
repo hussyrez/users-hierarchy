@@ -1,4 +1,4 @@
-module.exports.users = [
+export let users = [
     {
     "Id": 1,
     "Name": "Adam Admin",

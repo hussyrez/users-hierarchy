@@ -12,24 +12,13 @@ class RoleRepository {
 
     getAllRoles(){
         let users = this.cache.get("roles");
-        if(users){
-
-        }
-        else{
-            return "FUCK ME"
-        }
 
         return users;
-
     }
 
     addAllRoles(roles: Role[]): Role[]{
 
         let success = this.cache.set( "roles", roles, 10000 );
-
-        if(!success){
-            console.log("Failed to cache all roles.")
-        }
 
         return this.cache.get("roles") as Role[] || [];
     }
