@@ -3,19 +3,30 @@
 ## Steps for running it locally
 
 1 - Download the repository from git@github.com:hussyrez/users-hierarchy.git
+
 2 - Download and install NodeJS from https://nodejs.org/en/download/
+
 3 - Extract the repository or unzip
+
 4 - Remove the node_modules and package.lock.json from the project folder
+
 5 - navigate to `users-hierarchy` and install `node_modules` with the following command `npm install` 
+
 6 - Run `npm run dev` to start the project locally
+
 6 - once the project has started, enter the following URL into the browser: http://localhost:3000/api/docs/
+
 7 - there are a total of 5 routes in the Swagger Doc: 
+
 ![image](https://user-images.githubusercontent.com/12454898/133962578-002601c0-a554-43ac-80d9-4fda7d44226b.png)
 ![image](https://user-images.githubusercontent.com/12454898/133962585-e48d8581-0b35-4ff8-84d7-e04d4d28fe37.png)
 
 8 - In order to store the employees list of objects: click on ![image](https://user-images.githubusercontent.com/12454898/133962641-9950bf74-03e7-45df-ab25-ee1789dc73bc.png)
+
 9 - After the row expands, navigate to and click `Try It Out`  for /users/addUsers
+
 ![image](https://user-images.githubusercontent.com/12454898/133962682-e9c16a16-7d31-4cbe-a1e8-90d5bcdc7418.png)
+
 10 - paste your custom users list or the below into the request body:
 ```[
     {
@@ -47,6 +58,7 @@
 ]```
 
 11 - Try out the first end point under `Users` to check if the list of users has been stored in the cache or not :
+
 ![image](https://user-images.githubusercontent.com/12454898/133962816-966b02f1-3f59-4a01-ae2a-4587c19ab9fc.png)
 
 12 - Next step is to make a `post` request for storing the list of roles. You can use the below list of roles or your customized list:
