@@ -1,41 +1,34 @@
-import { UserService } from "../../services/user.service";
+import { userService } from "../../services/user.service";
+import { roleService } from "../../services/role.service";
+
 import { Request, Response } from "express";
 import HttpStatus from "http-status-codes";
 import {User} from "../../models/user.interface";
+import { Role } from "../../models/role.interface";
 
 export class UserController {
-    // protected service : UserService;
-    
-    // constructor(service: UserService) {
-    //     this.service = service;
-    // }
     
     addUsers(req: Request, res: Response)  {
-        let users: [User] = req.body;
+        let users: User[] = req.body;
         console.log(users);
-        // this.service.addUsers(req.body);
-        res.status(HttpStatus.OK).end();
+
+        let result = userService.addUsers(users);
+        res.status(HttpStatus.OK).send(result);
     }
 
-    addUser() {
+    getUsers(req: Request, res: Response)  {
+        let users = userService.getUsers();
 
+        res.status(HttpStatus.OK).send(users);
     }
 
-    
-    // setRole(req: Request, res: Response) {
-    //     this.service.addRoles(req.body);
-    //     res.status(HttpStatus.OK).end();
-    // }
+    getSubordinates(req: Request, res: Response) {
+        let roles = roleService.getRoles() as Role[];
+        let newRoles = userService.getSubordinates(parseInt(req.params.id), roles);
 
-    // getSubOrdinates(req: Request, res: Response) {
-    //     const id = Number(req.params["id"]);
-    //     res.status(HttpStatus.OK).json(this.service.getSubOrdinates(id)).end();
-    // }
+        res.status(HttpStatus.OK).send(newRoles);
+    }
 
-}
-
-module.exports = {
-    UserController
 }
 
 export default new UserController();

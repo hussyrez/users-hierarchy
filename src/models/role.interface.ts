@@ -1,5 +1,5 @@
 export interface Role {
-    name: String;
-    id: Number;
+    Name: String;
+    Id: Number;
     Parent: Number;
 }
